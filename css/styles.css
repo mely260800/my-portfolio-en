@@ -1,0 +1,111 @@
+body {
+  font-family: 'Lato', sans-serif;
+  background: linear-gradient(135deg, #1e2a78, #3f51b5, #00bcd4, #26c6da);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  color: #f3f7f8;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* ✨ Animación del fondo */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+header {
+  padding-top: 80px;
+}
+
+h1 {
+  color: #a9e5ff;
+  font-size: 2.6rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+}
+
+p {
+  font-size: 1.1rem;
+  color: #e0f7fa;
+}
+
+.coming-soon {
+  margin-top: 20px;
+  font-style: italic;
+}
+
+/* ✉️ Contact Section */
+#contact {
+  margin-top: 60px;
+}
+
+#contact h2 {
+  color: #b3e5fc;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+}
+
+.contact-item img {
+  width: 28px;
+  height: 28px;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.contact-item img:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 5px rgba(255,255,255,0.6));
+}
+
+.contact-item a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  font-weight: 400;
+}
+
+.contact-item a:hover {
+  color: #b3e5fc;
+}
+
+/* 🌍 Language switch */
+.lang-switch {
+  margin-top: 50px;
+}
+
+.lang-switch a {
+  color: #93f2fe;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* ⚙️ Footer */
+footer {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  font-size: 0.9rem;
+  color: #cfd8dc;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(5px);
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
