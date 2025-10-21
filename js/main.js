@@ -50,25 +50,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Textos por idioma
   const UI_TEXTS = {
-  en: {
-    headerName: "Melany Chuquimbalqui",
-    subtitle: "Frontend & Mobile Developer | UI/UX Designer",
-    contactTitle: "Contact",
-    welcome: "Select a category to start 🎮",
-    loading: (s) => `Loading ${s}...`,
-    btns: { web: "🌐 Web Apps", mobile: "📱 Mobile Apps", uiux: "🎨 UI/UX Design" },
-    toolsLabel: "Tools"
-  },
-  es: {
-    headerName: "Melany Chuquimbalqui",
-    subtitle: "Desarrolladora Frontend & Mobile | Diseñadora UI/UX",
-    contactTitle: "Contacto",
-    welcome: "Selecciona una categoría para empezar 🎮",
-    loading: (s) => `Cargando ${s}...`,
-    btns: { web: "🌐 Web Apps", mobile: "📱 Apps Móviles", uiux: "🎨 Diseño UI/UX" },
-    toolsLabel: "Herramientas"
-  }
-};
+    en: {
+      headerName: "Melany Chuquimbalqui",
+      subtitle: "Frontend & Mobile Developer | UI/UX Designer",
+      contactTitle: "Contact",
+      welcome: "Select a category to start 🎮",
+      loading: (s) => `Loading ${s}...`,
+      btns: { web: "🌐 Web Apps", mobile: "📱 Mobile Apps", uiux: "🎨 UI/UX Design" },
+      toolsLabel: "Tools",
+      tooltips: {
+        up: "Show description",
+        down: "Hide description",
+        left: "Previous",
+        right: "Next"
+      }
+    },
+    es: {
+      headerName: "Melany Chuquimbalqui",
+      subtitle: "Desarrolladora Frontend & Mobile | Diseñadora UI/UX",
+      contactTitle: "Contacto",
+      welcome: "Selecciona una categoría para empezar 🎮",
+      loading: (s) => `Cargando ${s}...`,
+      btns: { web: "🌐 Web Apps", mobile: "📱 Apps Móviles", uiux: "🎨 Diseño UI/UX" },
+      toolsLabel: "Herramientas",
+      tooltips: {
+        up: "Mostrar descripción",
+        down: "Ocultar descripción",
+        left: "Anterior",
+        right: "Siguiente"
+      }
+    }
+  };
 
   // Estado
   let currentSection = null;
@@ -91,10 +103,19 @@ document.addEventListener("DOMContentLoaded", () => {
     subtitleEl.textContent = t.subtitle;
     footerContactTitle.textContent = t.contactTitle;
 
+    const screen = document.getElementById("consoleScreen");
+    screen.classList.add("flash");
+    setTimeout(() => screen.classList.remove("flash"), 400);
+
     sectionButtons.forEach(btn => {
       const key = btn.dataset.section;
       if (key && t.btns[key]) btn.textContent = t.btns[key];
     });
+
+    document.getElementById("upBtn").setAttribute("data-tooltip", t.tooltips.up);
+    document.getElementById("downBtn").setAttribute("data-tooltip", t.tooltips.down);
+    document.getElementById("leftBtn").setAttribute("data-tooltip", t.tooltips.left);
+    document.getElementById("rightBtn").setAttribute("data-tooltip", t.tooltips.right);
 
     if (!currentSection) {
       projectDisplay.innerHTML = `<p class="welcome-text">${t.welcome}</p>`;
@@ -113,8 +134,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     projectDisplay.style.opacity = 0;
     setTimeout(() => {
-    try {
-      projectDisplay.innerHTML = `
+      try {
+        projectDisplay.innerHTML = `
         <div class="project-content">
           <img src="${project.img}" alt="${titleText}">
           <p class="project-title">${titleText}</p>
@@ -124,12 +145,12 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
       `;
-      projectDisplay.style.opacity = 1;
-    } catch (error) {
-      console.error("Error rendering project:", error);
-      projectDisplay.innerHTML = `<p class="welcome-text">Oops! Something went wrong 😢</p>`;
-    }
-  }, skipLoading ? 0 : 300);
+        projectDisplay.style.opacity = 1;
+      } catch (error) {
+        console.error("Error rendering project:", error);
+        projectDisplay.innerHTML = `<p class="welcome-text">Oops! Something went wrong 😢</p>`;
+      }
+    }, skipLoading ? 0 : 300);
   }
 
   // Navegación por flechas
@@ -167,6 +188,13 @@ document.addEventListener("DOMContentLoaded", () => {
       currentSection = section;
       currentIndex = 0;
       showProject(currentSection, currentIndex);
+    });
+  });
+
+  document.querySelectorAll(".dpad-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      btn.classList.add("spark");
+      setTimeout(() => btn.classList.remove("spark"), 600);
     });
   });
 

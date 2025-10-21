@@ -1,10 +1,27 @@
 /* ==== General ==== */
-body {
+/*body {
   margin: 0;
   font-family: 'Lato', sans-serif;
   background: linear-gradient(135deg, #c3a6ff, #a8e6cf, #d1c4e9);
   background-size: 400% 400%;
   animation: gradientMove 10s ease infinite;
+  color: #2a1a3d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}*/
+
+body {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  background: 
+    url("../img/star2.png") repeat,
+    linear-gradient(135deg, #c3a6ff, #a8e6cf, #d1c4e9);
+  background-size: 80px 80px, 400% 400%; /* más separación */
+  /*background-position: 0 0, 0 50%;*/
+  background-blend-mode: soft-light;
+  animation: gradientMove 30s ease infinite;
   color: #2a1a3d;
   display: flex;
   flex-direction: column;
@@ -270,12 +287,14 @@ body {
 }
 
 .project-content img {
-  width: auto;
+  width: 100%;
+  height: auto;
   max-width: 85%;
-  max-height: 300px;
-  border-radius: 12px;
+  max-height: 370px;
   object-fit: contain;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  margin-top: 20px;
 }
 
 .project-content img:hover {
@@ -378,6 +397,29 @@ body {
   height: 45px;
   cursor: pointer;
   transition: all 0.15s ease;
+  position: relative;
+}
+
+.dpad-btn::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 120%; 
+  left: 50%;
+  transform: translateX(-50%);
+  background: #583b7abd;
+  color: #fff;
+  font-size: 0.6rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+}
+
+.dpad-btn:hover::after {
+  opacity: 1;
 }
 
 .dpad-btn:hover {
@@ -418,16 +460,6 @@ body {
   overflow: hidden;
 }
 
-.project-content img {
-  width: 100%;
-  height: auto;
-  max-height: 400px;
-  object-fit: contain;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  transition: transform 0.3s ease;
-}
-
 /* === Project description === */
 .project-description {
   margin-top: 1rem;
@@ -439,7 +471,7 @@ body {
   text-align: center;
   font-size: 0.8rem;
   color: #ddd;
-  line-height: 1.4;
+  line-height: 1.2;
 }
 
 .project-description[style*="display: none"] {
@@ -455,4 +487,32 @@ body {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes consoleFlash {
+  0%   { background-color: #1a1033; }
+  25%  { background-color: #2a1a4d; }
+  50%  { background-color: #1a1033; }
+  75%  { background-color: #2a1a4d; }
+  100% { background-color: #1a1033; }
+}
+
+.console-screen.flash {
+  animation: consoleFlash 0.4s ease-in-out;
+}
+
+@keyframes sparkle {
+  0% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.2) rotate(45deg); }
+  100% { opacity: 0; transform: scale(0.5) rotate(90deg); }
+}
+
+.dpad-btn.spark::after {
+  content: "✦";
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 1rem;
+  color: #ffd700;
+  animation: sparkle 0.6s ease forwards;
 }
